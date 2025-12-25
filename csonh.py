@@ -1,5 +1,5 @@
 """
-CSONH (Concise Structured Object Notation for Humanity) - V3 Runtime Loader
+CSONH (Concise Structured Object Notation for Humanity) - Runtime Loader
 
 A strict, data-only, zero-dependency parser for CSONH configuration files.
 Compatible with CSONH Standard 1.0.
