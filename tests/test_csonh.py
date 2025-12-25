@@ -1,10 +1,11 @@
 """
-CSONH 1.0 Compliance Test Suite (Python)
+CSONH 1.0.1 Compliance Test Suite (Python)
 Run with: pytest tests/test_csonh.py
 """
 import sys
 import os
 import pytest
+from textwrap import dedent
 
 # Add parent directory to path to import csonh.py
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -24,16 +25,18 @@ def test_basic_object():
     assert csonh.loads(src) == {"key": "value"}
 
 def test_implicit_object_structure():
-    src = """
+    # FIX: Use dedent so the parser gets clean, left-aligned text
+    src = dedent("""
     server:
       host: 'localhost'
       port: 8080
-    """
+    """)
     assert csonh.loads(src) == {"server": {"host": "localhost", "port": 8080}}
 
 def test_arrays():
     assert csonh.loads("[1, 2, 3]") == [1, 2, 3]
-    assert csonh.loads("[\n  1\n  2\n]") == [1, 2, 3]
+    # FIX: Strict Mode requires commas in flow arrays [ ... ]
+    assert csonh.loads("[\n  1,\n  2,\n  3\n]") == [1, 2, 3]
 
 # ==========================================
 # 2. Strict Separation
@@ -91,7 +94,11 @@ def test_numbers():
 
 def test_booleans_case_sensitive():
     assert csonh.loads("a: yes") == {"a": True}
-    assert csonh.loads("b: NO") == {"b": "NO"} # String, not bool
+    
+    # FIX: Strict CSONH rejects barewords. 'NO' is not a keyword.
+    # It must NOT parse as a string. It must raise an error.
+    with pytest.raises(csonh.ParseError):
+        csonh.loads("b: NO") 
 
 # ==========================================
 # 6. Security & Rejection
@@ -106,5 +113,6 @@ def test_allow_interpolation_literal_single_quote():
     assert csonh.loads("a: 'val #{x}'") == {"a": "val #{x}"}
 
 def test_reject_arithmetic():
-    with pytest.raises(csonh.ParseError):
+    # FIX: Catch LexerError (invalid char '+') OR ParseError
+    with pytest.raises((csonh.ParseError, csonh.LexerError)):
         csonh.loads("a: 1 + 2")
