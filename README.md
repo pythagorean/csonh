@@ -89,11 +89,11 @@ features: [
 
 # Environment-specific
 production:
-  debug: false
+  debug: no
   workers: 8
 
 development:
-  debug: true
+  debug: yes
   workers: 1
 ```
 
