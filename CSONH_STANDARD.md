@@ -1,7 +1,7 @@
 # CSONH Specification
 
-**Version:** 1.0  
-**Date:** December 24, 2025  
+**Version:** 1.0.1
+**Date:** December 25, 2025  
 **Status:** Stable
 
 CSONH (Concise Structured Object Notation for Humanity) is a strict, data-only configuration format that combines JSON's clarity with YAML's readability. This document defines the complete specification for CSONH 1.0.
@@ -71,16 +71,14 @@ database:
 [1, 2, 3, 4, 5]
 ```
 
-**Newline-separated (commas optional):**
+**Multiline Flow:**
 ```coffee
 [
-  'authentication'
-  'caching'
+  'authentication',
+  'caching',
   'logging'
 ]
 ```
-*Note:* Items on the same line **must** be separated by commas. Whitespace-only separation (e.g., ```[1 2 3]```) 
-is **not supported** to prevent ambiguity.
 
 **Trailing commas allowed:**
 ```coffee
@@ -438,11 +436,12 @@ CSONH specification and reference implementations: MIT License
 
 **1.0** (December 24, 2025)
 - Initial stable release
-- Complete specification
-- Reference implementations in Python and CoffeeScript
-- 120-test validation suite
+**1.0.1** (December 25, 2025)
+- Correction for public version
+- Commas required for multiline list
+
 
 ---
 
-**The CSONH 1.0 specification is stable. The format will not change.**  
+**The CSONH 1.0.1 specification is stable. The format will not change.**  
 Bug reports and implementation improvements are welcome via GitHub issues.
