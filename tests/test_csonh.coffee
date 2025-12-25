@@ -1,4 +1,4 @@
-# CSONH 1.0 Compliance Test Suite (CoffeeScript)
+# CSONH 1.0.1 Compliance Test Suite (CoffeeScript)
 # Run with: coffee tests/test_csonh.coffee
 
 CSONH = require '../csonh'
@@ -40,6 +40,15 @@ run "Implicit Structure", ->
 
 run "Arrays", ->
   assert.deepStrictEqual CSONH.parse("[1, 2, 3]"), [1, 2, 3]
+  # STRICT MODE: Verify multiline arrays require commas
+  src_multiline = """
+  [
+    1,
+    2,
+    3
+  ]
+  """
+  assert.deepStrictEqual CSONH.parse(src_multiline), [1, 2, 3]
 
 # ==========================================
 # 2. Strict Separation
@@ -72,8 +81,7 @@ run "Triple Quote Dedent", ->
     Line 2
     '''
   """
-  # Note: CoffeeScript multiline string in test source preserves indent
-  # CSONH parser removes it.
+  # CoffeeScript """ handles the test code indentation automatically
   assert.deepStrictEqual CSONH.parse(src), {msg: "Line 1\nLine 2"}
 
 run "Triple Quote Immediate Dedent", ->
@@ -91,7 +99,9 @@ run "Numbers", ->
 
 run "Booleans Case Sensitive", ->
   assert.deepStrictEqual CSONH.parse("a: yes"), {a: true}
-  assert.deepStrictEqual CSONH.parse("b: NO"), {b: "NO"}
+  
+  # STRICT FIX: 'NO' is a bareword. Strict mode must reject it.
+  assert.throws -> CSONH.parse("b: NO")
 
 # ==========================================
 # 6. Security
