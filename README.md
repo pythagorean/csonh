@@ -100,7 +100,7 @@ development:
 Result:
 ```python
 {
-  'app': {'name': 'MyApp', 'version': 1.2.3},
+  'app': {'name': 'MyApp', 'version': '1.2.3'},
   'database': {'host': 'localhost', 'port': 5432, 'pool': {'min': 2, 'max': 10}},
   'features': ['authentication', 'caching', 'logging'],
   'production': {'debug': False, 'workers': 8},
