@@ -70,9 +70,9 @@ config = CSONH.parse(source)
 # Application configuration
 app:
   name: 'MyApp'
-  version: 1.2.3
-  
-# Database settings  
+  version: '1.2.3'
+
+# Database settings
 database:
   host: 'localhost'
   port: 5432
@@ -82,18 +82,18 @@ database:
 
 # Feature flags
 features: [
-  'authentication'
-  'caching'
+  'authentication',
+  'caching',
   'logging'
 ]
 
 # Environment-specific
 production:
-  debug: no
+  debug: false
   workers: 8
-  
+
 development:
-  debug: yes
+  debug: true
   workers: 1
 ```
 
