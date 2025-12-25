@@ -1,8 +1,8 @@
 # CSONH Specification
 
-**Version:** 1.0.1
-**Date:** December 25, 2025  
-**Status:** Stable
+**Version:** 1.0.1   
+**Date:** December 25, 2025    
+**Status:** Stable   
 
 CSONH (Concise Structured Object Notation for Humanity) is a strict, data-only configuration format that combines JSON's clarity with YAML's readability. This document defines the complete specification for CSONH 1.0.
 
@@ -435,11 +435,12 @@ CSONH specification and reference implementations: MIT License
 ## Version History
 
 **1.0** (December 24, 2025)
-- Initial stable release
-**1.0.1** (December 25, 2025)
-- Correction for public version
-- Commas required for multiline list
+- Initial release
 
+**1.0.1** (December 25, 2025)
+- Correction for public version:
+- Commas required for multiline list
+- Stable release
 
 ---
 
